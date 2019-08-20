@@ -1,0 +1,6 @@
+# Ignore zChecks binary files copied by the packaging script
+lib/
+tools/
+
+# Include files from the build folder
+!build/
