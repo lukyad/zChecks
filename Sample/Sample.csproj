@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}</ProjectGuid>
+    <ProjectGuid>{22892F7E-5FAA-44CB-9280-8CCBA71448CD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Sample</RootNamespace>
     <AssemblyName>Sample</AssemblyName>
@@ -12,8 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\zChecks\zChecks.csproj">
@@ -62,11 +59,4 @@
   <PropertyGroup>
     <PostBuildEvent>$(SolutionDir)PostBuildUtil\$(OutDir)PostBuildUtil.exe $(ProjectDir) $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\zChecks.1.0.0\build\zChecks.targets" Condition="Exists('..\packages\zChecks.1.0.0\build\zChecks.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\zChecks.1.0.0\build\zChecks.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\zChecks.1.0.0\build\zChecks.targets'))" />
-  </Target>
 </Project>

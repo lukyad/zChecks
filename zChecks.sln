@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zChecks", "zChecks\zChecks.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostBuildUtil", "PostBuildUtil\PostBuildUtil.csproj", "{6A4EE6F5-0501-4275-A353-DFE292B161A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{22892F7E-5FAA-44CB-9280-8CCBA71448CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{6A4EE6F5-0501-4275-A353-DFE292B161A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A4EE6F5-0501-4275-A353-DFE292B161A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A4EE6F5-0501-4275-A353-DFE292B161A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56BE58C9-AFC4-4064-B4AA-B8794EBBE23C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22892F7E-5FAA-44CB-9280-8CCBA71448CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22892F7E-5FAA-44CB-9280-8CCBA71448CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22892F7E-5FAA-44CB-9280-8CCBA71448CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22892F7E-5FAA-44CB-9280-8CCBA71448CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
