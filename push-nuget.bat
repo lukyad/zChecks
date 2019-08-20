@@ -17,7 +17,7 @@ robocopy PostBuildUtil\bin\Release nuget\tools *.dll *.exe
 cd nuget
 if exist *.nupkg (del *.nupkg || goto :error)
 nuget pack zChecks.nuspec || goto :error
-rem nuget push *.nupkg || goto :error
+nuget push *.nupkg -src https://api.nuget.org/v3/index.json || goto :error
 cd .. || goto :error
 
 goto :EOF

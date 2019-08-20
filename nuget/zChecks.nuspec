@@ -6,9 +6,13 @@
     <authors>lukyad</authors>
     <owners>lukyad</owners>
     <projectUrl>https://github.com/lukyad/zChecks</projectUrl>
+    <language>CSharp</language>
+    <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Minimalistic conditions checking library with zero overhead and plentiful diagnostics.</description>
     <copyright>Copyright 2019</copyright>
+    <title>zChecks</title>
+    <summary>Minimalistic conditions checking library with zero overhead and plentiful diagnostics.</summary>
     <tags>Condition Check Argument Validation</tags>
   </metadata>
 </package>
