@@ -22,7 +22,7 @@ namespace PostBuildUtil
         {
             ValidateArgs(args);
             var projectDir = args[0];
-            var targetAssembly = args[0];
+            var targetAssembly = args[1];
             var checks= CollectChecksInfo(projectDir);
             EmbedChecksInfo(targetAssembly, checks: checks);
             Console.Out.WriteLine($"Successfully embeded info on {checks.Count()} check(s) into {args[1]}.");
