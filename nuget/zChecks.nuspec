@@ -2,16 +2,13 @@
 <package >
   <metadata>
     <id>zChecks</id>
-    <version>1.0.0</version>
-    <authors>dmitr</authors>
-    <owners>dmitr</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <version>0.1.0</version>
+    <authors>lukyad</authors>
+    <owners>lukyad</owners>
+    <projectUrl>https://github.com/lukyad/zChecks</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>Minimalistic conditions checking library with zero overhead and plentiful diagnostics.</description>
     <copyright>Copyright 2019</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags>Condition Check Argument Validation</tags>
   </metadata>
 </package>
