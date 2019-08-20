@@ -9,25 +9,7 @@ using zChecks;
 
 namespace zChecks
 {
-    public class CheckException : Exception
-    {
-        internal CheckException(string diagnostics) : base(diagnostics)
-        {
-        }
-}
-
-    public class DummyArg { }
-
-    [Serializable]
-    public class CheckInfo
-    {
-        public string File;
-        public int Line;
-        public string Condition;
-        public string[] Args;
-    }
-
-    public static partial class Util
+    public static class Util
     {
         public static readonly string ChecksResourceName = "zChecks";
 
@@ -47,6 +29,8 @@ namespace zChecks
             return (CheckInfo[])f.Deserialize(s);
         }
 
+        // Gets Embeded Checks information from an assembly.
+        // Returns null, if embeded resource associated with zChecks library doesn't exist.
         public static CheckInfo[] GetChecksInfo(Assembly assembly)
         {
             using (var s = assembly.GetManifestResourceStream(ChecksResourceName))

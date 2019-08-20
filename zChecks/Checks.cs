@@ -15,24 +15,31 @@ namespace z
         static readonly Dictionary<Assembly, Dictionary<(string file, int line), CheckInfo>> _diagnostics = new Dictionary<Assembly, Dictionary<(string file, int line), CheckInfo>>();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Check(bool condition, DummyArg doNotUse = null, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
+        public static void Check(bool condition, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
                 throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Check<T>(bool condition, T arg, DummyArg doNotUse = null, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
+        public static void Check<T>(bool condition, T arg, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
                 throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Check<T1, T2>(bool condition, T1 arg1, T2 arg2, DummyArg doNotUse = null, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
+        public static void Check<T1, T2>(bool condition, T1 arg1, T2 arg2, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
                 throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Check<T1, T2, T3>(bool condition, T1 arg1, T2 arg2, T3 arg3, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
+        {
+            if (!condition)
+                throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3));
         }
 
         static string Diagnostics(Assembly assembly, string file, int line, params object[] args) =>
@@ -55,6 +62,8 @@ namespace z
 
         static string FormatDiagnostics(CheckInfo diagnostics, object[] args)
         {
+            if (diagnostics.Args != null && diagnostics.Args.Length != args.Length) throw new ApplicationException($"Internal {nameof(zChecks)} error: diagnostics.Args.Length != args.Length");
+
             return String.Format("Check failed:{0}{1}", Environment.NewLine, String.Join(Environment.NewLine,
                 Enumerable.Empty<string>()
                 .Append(diagnostics.Condition)

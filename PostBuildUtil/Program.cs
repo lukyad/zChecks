@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using System.IO;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,18 +9,32 @@ using zChecks;
 
 namespace PostBuildUtil
 {
+    /// <summary>
+    /// Command line utility that collects information on all x.Checks.Check() invovations
+    /// and embed that information into the target assembly.
+    /// Takes projectDir and targetAssemblyPath as parameters.
+    /// When zChecks nuget package is being installed, PostBuildUtil.exe is automatically injected into the target csproj file
+    /// as a PostBuild command.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
             ValidateArgs(args);
-            var checksInfo = CollectChecksInfo(projectDir: args[0]);
-            EmbedChecksInfo(args[1], checksInfo);
-            Console.Out.WriteLine($"Successfully embeded info on {checksInfo.Count()} check(s) into {args[1]}.");
+            var projectDir = args[0];
+            var targetAssembly = args[0];
+            var checks= CollectChecksInfo(projectDir);
+            EmbedChecksInfo(targetAssembly, checks: checks);
+            Console.Out.WriteLine($"Successfully embeded info on {checks.Count()} check(s) into {args[1]}.");
         }
 
         static void ValidateArgs(string[] args)
         {
+            if (args == null && args.Length != 2) throw new ApplicationException($"Invalid arguments. Usage: {nameof(PostBuildUtil)}.exe <targetProjectDir> <targetAssemplyPath>");
+            var projectDir = args[0];
+            var targetAssembly = args[1];
+            if (!Directory.Exists(args[0])) throw new ApplicationException($"Project directory \"${projectDir}\" doesn't exist.");
+            if (!File.Exists(targetAssembly)) throw new ApplicationException($"Target assembly \"${targetAssembly}\" can not be found.");
         }
 
         static void EmbedChecksInfo(string targetAssembly, IEnumerable<CheckInfo> checks)
@@ -47,20 +59,12 @@ namespace PostBuildUtil
 
         static void MoveFile(string source, string dest)
         {
-            File.Copy(source, dest, overwrite: true);
-            File.Delete(source);
+            File.Delete(dest);
+            File.Move(source, dest);
         }
 
         static string Tmp(string file) => file + ".tmp";
-
-        static CustomAttribute CreateDubuggableAttr(AssemblyDefinition def)
-        {
-            var attr = new CustomAttribute(def.MainModule.ImportReference(typeof(DebuggableAttribute).GetConstructor(new[] { typeof(bool), typeof(bool) })));
-            attr.ConstructorArguments.Add(new CustomAttributeArgument(def.MainModule.ImportReference(typeof(bool)), true));
-            attr.ConstructorArguments.Add(new CustomAttributeArgument(def.MainModule.ImportReference(typeof(bool)), true));
-            return attr;
-        }
-
+        
         static IEnumerable<CheckInfo> CollectChecksInfo(string projectDir)
         {
             foreach (var file in Directory.EnumerateFiles(projectDir, "*.cs", SearchOption.AllDirectories))
