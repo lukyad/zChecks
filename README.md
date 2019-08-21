@@ -17,7 +17,7 @@ class Program
         Test(myString: "I ♥ Programming", myInt: 0, myDouble: 0, myArray: null);
         // Console Output
         // Check failed: `myString.EndsWith("ZeroChecks")`
-        // myString: I ♥ Programming
+        // myString: I ♥ Programming
         // file: MY_REPOS\zChecks\Sample\Program.cs
         // line: 53
         Test(myString: "I ♥ ZeroChecks", myInt: 0, myDouble: 0, myArray: null);
