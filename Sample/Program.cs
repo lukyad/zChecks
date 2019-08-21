@@ -13,7 +13,7 @@ namespace Sample
         static void Main(string[] args)
         {
             Check(args != null);
-            Check(args.Length > 0, args.Length);
+            Check(args.Length > 0, args.Length, msg: "Expected non-empty args");
         }
     }
 }
