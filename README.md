@@ -11,7 +11,7 @@ class Program
     {
         try
         {
-            // Two Checks on the same line resultsin no detailed dignostics to be printed, just file:line
+            // Two Checks on the same line result in no detailed dignostics to be printed, just file:line
             Check(!String.IsNullOrEmpty(myString)); Check(!String.IsNullOrEmpty(myString));
             Check(myString.EndsWith("ZeroChecks"), myString);
             Check(myInt > 0,
