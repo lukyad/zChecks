@@ -15,7 +15,6 @@ namespace zChecks
     {
         public string File;
         public int Line;
-        public string Condition;
-        public string[] Args;
+        public string Check;
     }
 }

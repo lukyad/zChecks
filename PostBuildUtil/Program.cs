@@ -23,7 +23,7 @@ namespace PostBuildUtil
             ValidateArgs(args);
             var projectDir = args[0];
             var targetAssembly = args[1];
-            var checks= CollectChecksInfo(projectDir);
+            var checks = CollectChecksInfo(projectDir);
             EmbedChecksInfo(targetAssembly, checks: checks);
             Console.Out.WriteLine($"Successfully embeded info on {checks.Count()} check(s) into {args[1]}.");
         }
@@ -85,13 +85,11 @@ namespace PostBuildUtil
                 foreach (var check in checks)
                 {
                     var line = check.SyntaxTree.GetLineSpan(check.Span).StartLinePosition.Line;
-                    var argList = check.ArgumentList.Arguments.Select(a => a.ToString()).ToArray();
                     yield return new CheckInfo
                     {
                         File = file,
                         Line = line + 1, // line is zero based
-                        Condition = argList.First(),
-                        Args = argList.Skip(1).ToArray(),
+                        Check = check.ToString(),
                     };
                 }
             }
