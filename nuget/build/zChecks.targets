@@ -3,15 +3,4 @@
     <Target Name="EmbedChecksDiagnostics" AfterTargets="Build">
         <Exec Command="$(MSBuildThisFileDirectory)..\tools\PostBuildUtil.exe $(MSBuildProjectDirectory) $(TargetPath)" />
     </Target>
-  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
-    <Reference Include="zChecks">
-      <HintPath>$(MSBuildThisFileDirectory)..\lib\net40\debug\zChecks.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <Reference Include="zChecks">
-      <HintPath>$(MSBuildThisFileDirectory)..\lib\net40\release\zChecks.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>
