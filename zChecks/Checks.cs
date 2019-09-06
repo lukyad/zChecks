@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Diagnostics;
 using zChecks;
 
 namespace z
@@ -18,28 +18,48 @@ namespace z
         public static void Check(bool condition, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
-                throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line));
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Check<T>(bool condition, T arg, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
-                throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg));
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Check<T1, T2>(bool condition, T1 arg1, T2 arg2, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
-                throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2));
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Check<T1, T2, T3>(bool condition, T1 arg1, T2 arg2, T3 arg3, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
         {
             if (!condition)
-                throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3));
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Check<T1, T2, T3, T4>(bool condition, T1 arg1, T2 arg2, T3 arg3, T4 arg4, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0)
+        {
+            if (!condition)
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3, arg4));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Check<T1, T2, T3, T4, T5>(bool condition, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0, params object[] rest)
+        {
+            if (!condition)
+                AssertThenThrow(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3, arg4, arg5, rest));
+        }
+
+        static void AssertThenThrow(string message)
+        {
+            Debug.Assert(false, message);
+            throw new CheckException(message);
         }
 
         static string Diagnostics(Assembly assembly, string file, int line, params object[] args) =>
