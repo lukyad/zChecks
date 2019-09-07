@@ -93,7 +93,7 @@ namespace z
 
         static string FormatDiagnostics(CheckInfo diagnostics, object[] args)
         {
-            return String.Format($"{diagnostics.File}:{diagnostics.Line}: Check failed. {FullDescription()}");
+            return String.Format("{0}:{1}: Check failed. {2}", diagnostics.File, diagnostics.Line, FullDescription());
 
             string FullDescription() => diagnostics.Check == null ? null : String.Join(Environment.NewLine, Enumerable.Empty<string>()
                 .Append(String.Empty)
@@ -108,7 +108,7 @@ namespace z
             {
                 var description = new StringBuilder();
                 for (int i = 0; i < args.Length; i++)
-                        description.AppendLine($"[{i}]: {args[i]}".FormatMultiline());
+                        description.AppendLine(String.Format("[{0}]: {1}", i, args[i]).FormatMultiline());
                 
                 return  description.ToString();
             }
