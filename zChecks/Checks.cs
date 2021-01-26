@@ -48,6 +48,42 @@ namespace z {
         throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3, arg4, arg5, rest));
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check(bool? condition, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check<T>(bool? condition, T arg, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check<T1, T2>(bool? condition, T1 arg1, T2 arg2, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check<T1, T2, T3>(bool? condition, T1 arg1, T2 arg2, T3 arg3, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check<T1, T2, T3, T4>(bool? condition, T1 arg1, T2 arg2, T3 arg3, T4 arg4, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3, arg4));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static void Check<T1, T2, T3, T4, T5>(bool? condition, T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5, DoNotUseArg doNotUse = default, [CallerFilePath]string file = null, [CallerLineNumber]int line = 0, params object[] rest) {
+      if (!(condition ?? false))
+        throw new CheckException(Diagnostics(Assembly.GetCallingAssembly(), file, line, arg1, arg2, arg3, arg4, arg5, rest));
+    }
+
     static string Diagnostics(Assembly assembly, string file, int line, params object[] args) =>
         FormatDiagnostics(GetCheckInfo(assembly, file, line) ?? new CheckInfo { File = file, Line = line }, args);
 
