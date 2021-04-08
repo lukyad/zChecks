@@ -1,0 +1,34 @@
+#!/usr/bin/env zsh
+#
+# Build zChecks and push it to nuget.org. Doesn't take any arguments.
+
+emulate -L  zsh -o err_exit -o extended_glob
+
+if (( ARGC )); then
+  print -ru2 -- "usage: ${(q)0}"
+  exit 1
+fi
+
+setopt xtrace
+
+cd -- ${0:h}
+rm -rf zChecks/bin PostBuildUtil/bin nuget/lib nuget/tools nuget/*.nupkg(N)
+
+dotnet.exe build -c Release
+
+local file=
+for file in zChecks/bin/Release/*/*.dll; do
+  local platform=${file:h:t}
+  mkdir -p nuget/lib/$platform
+  cp -- $file ./nuget/lib/$platform/
+done
+
+cp -r PostBuildUtil/bin/Release nuget/tools
+rm -f -- nuget/tools/**/*~*.(dll|exe)(.)
+
+cd nuget
+nuget.exe pack zChecks.nuspec
+
+local key=
+read $'key?\nEnter nuget.org API key for NLog.Events: '
+nuget.exe push zChecks.*.nupkg -ApiKey "$key" -Source https://api.nuget.org/v3/index.json

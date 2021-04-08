@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>zChecks</id>
-    <version>0.2.5</version>
+    <version>0.3.0-rc1</version>
     <authors>lukyad</authors>
     <owners>lukyad</owners>
     <projectUrl>https://github.com/lukyad/zChecks</projectUrl>
@@ -14,5 +14,8 @@
     <title>zChecks</title>
     <summary>Minimalistic conditions checking library with zero overhead and plentiful diagnostics.</summary>
     <tags>Condition Check Argument Validation</tags>
+    <dependencies>
+      <group targetFramework="netstandard2.0"/>
+    </dependencies>
   </metadata>
 </package>
