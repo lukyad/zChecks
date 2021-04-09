@@ -94,9 +94,9 @@ PM> Install-Package zChecks
 
 No additional steps are required.
 
-# Couple of words on how it works
+# How it works
 
-It looks like magic how zChecks is able to capture the Check context! But no worires, there is no magic here. When zChecks package is being installed it injects an extra PostBuild step into the target project. During this step zChecks parses all C# files in the project using Roslyn API and collects context for all Check invocations. Then it embeds this information into the target assembly. At run time zChecks uses the embeded information to generate diagnostic messages. That's it!
+When zChecks package is being installed it injects an extra PostBuild step into the target project. During this step zChecks parses all C# files in the project using Roslyn API and collects context for all Check invocations. Then it embeds this information into the target assembly. At run time zChecks uses the embeded information to generate diagnostic messages. That's it!
 
 # Limitations
 
