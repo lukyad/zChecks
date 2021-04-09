@@ -1,16 +1,17 @@
 ﻿using System;
 
+using static z.Checks;
+
 namespace zChecksTest {
-  using static z.Checks;
   class Program {
     static void Test(string myString, int myInt, double myDouble, object[] myArray) {
       try {
-        // Two Checks on the same line result in no detailed dignostics to be printed, just file:line
+        // Two checks on the same line result in no detailed dignostics to be printed, just file:line.
         Check(!String.IsNullOrEmpty(myString)); Check(!String.IsNullOrEmpty(myString));
         Check(myString.EndsWith("ZeroChecks"), myString);
         Check(myInt > 0,
-            "expected positive int",
-            myInt);
+              "expected positive int",
+              myInt);
         Check(myDouble > myInt, myInt, myDouble);
         Check(myArray != null, "array can not be null");
         Check(myArray.Length > 0, myArray.Length);
@@ -68,13 +69,7 @@ namespace zChecksTest {
       // >
 
       Test(myString: "I ♥ ZeroChecks", myInt: 1, myDouble: 1.5, myArray: new object[] { 1, 2, 3 });
-      // The call above doesn't generate any exceptions and thus produces an empty Console Output.
+      // The call above doesn't generate any exceptions and thus produces no console output.
     }
   }
 }
-
-
-
-
-
-
