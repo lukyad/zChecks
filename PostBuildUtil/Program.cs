@@ -48,6 +48,7 @@ namespace PostBuildUtil {
         def.Write(Tmp(targetAssembly), writerParams);
       }
       MoveFile(Tmp(targetAssembly), targetAssembly);
+      File.WriteAllText(targetAssembly + ".zchecks", "");
     }
 
     static void MoveFile(string source, string dest) {
