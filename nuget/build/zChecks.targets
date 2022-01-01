@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Target Name="EmbedChecksDiagnostics" AfterTargets="PostBuildEvent" Inputs="$(TargetPath)" Outputs="$(TargetPath).zchecks">
-        <Exec Command="$(MSBuildThisFileDirectory)..\tools\PostBuildUtil.exe $(MSBuildProjectDirectory) $(TargetPath)" />
-    </Target>
+  <Target
+      Name="zChecksEmbedDiagnostics"
+      DependsOnTargets="Compile"
+      BeforeTargets="CopyFilesToOutputDirectory"
+      Inputs="@(IntermediateAssembly)"
+      Outputs="@(IntermediateAssembly->'%(FullPath).zchecks')">
+    <Exec Command="$(MSBuildThisFileDirectory)..\tools\PostBuildUtil.exe $(MSBuildProjectDirectory) @(IntermediateAssembly)" />
+  </Target>
 </Project>
