@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>zChecks</id>
-    <version>0.6.0</version>
+    <version>0.6.1-rc1</version>
     <authors>lukyad</authors>
     <owners>lukyad</owners>
     <projectUrl>https://github.com/lukyad/zChecks</projectUrl>
