@@ -12,7 +12,7 @@ fi
 setopt xtrace
 
 cd -- ${0:h}
-rm -rf zChecks/bin PostBuildUtil/bin nuget/lib nuget/tools nuget/*.nupkg(N)
+rm -rf zChecks/bin nuget/lib nuget/*.nupkg(N)
 
 dotnet.exe build -c Release
 
@@ -22,9 +22,6 @@ for file in zChecks/bin/Release/*/*.dll; do
   mkdir -p nuget/lib/$platform
   cp -- $file ./nuget/lib/$platform/
 done
-
-cp -r PostBuildUtil/bin/Release nuget/tools
-rm -f -- nuget/tools/**/*~*.(dll|exe)(.)
 
 cd nuget
 nuget.exe pack zChecks.nuspec
