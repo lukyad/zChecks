@@ -18,7 +18,7 @@ namespace z {
         [CallerFilePath] string file = null, 
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr), file, line));
+      CheckSlow(condition, conditionStr, file, line);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -31,7 +31,7 @@ namespace z {
         [CallerFilePath] string file = null,
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr, argStr), file, line, arg));
+      CheckSlow(condition, arg, conditionStr, argStr, file, line);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -46,7 +46,7 @@ namespace z {
         [CallerFilePath] string file = null,
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2), file, line, arg1, arg2));
+      CheckSlow(condition, arg1, arg2, conditionStr, argStr1, argStr2, file, line);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -63,7 +63,7 @@ namespace z {
         [CallerFilePath] string file = null,
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3), file, line, arg1, arg2, arg3));
+      CheckSlow(condition, arg1, arg2, arg3, conditionStr, argStr1, argStr2, argStr3, file, line);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -82,7 +82,7 @@ namespace z {
         [CallerFilePath] string file = null,
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3, argStr4), file, line, arg1, arg2, arg3, arg4));
+      CheckSlow(condition, arg1, arg2, arg3, arg4, conditionStr, argStr1, argStr2, argStr3, argStr4, file, line);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -103,10 +103,99 @@ namespace z {
         [CallerFilePath] string file = null,
         [CallerLineNumber] int line = 0) {
       if (condition) return;
-      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3, argStr4, argStr5), file, line, arg1, arg2, arg3, arg4, arg5));
+      CheckSlow(condition, arg1, arg2, arg3, arg4, arg5, conditionStr, argStr1, argStr2, argStr3, argStr4, argStr5, file, line);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
+    static void CheckSlow(
+        bool condition,
+        string conditionStr,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr), file, line));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void CheckSlow<T>(
+        bool condition,
+        T arg,
+        string conditionStr,
+        string argStr,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr, argStr), file, line, arg));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    static void CheckSlow<T1, T2>(
+        bool condition,
+        T1 arg1,
+        T2 arg2,
+        string conditionStr,
+        string argStr1,
+        string argStr2,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2), file, line, arg1, arg2));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void CheckSlow<T1, T2, T3>(
+        bool condition,
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        string conditionStr,
+        string argStr1,
+        string argStr2,
+        string argStr3,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3), file, line, arg1, arg2, arg3));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void CheckSlow<T1, T2, T3, T4>(
+        bool condition,
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        string conditionStr,
+        string argStr1,
+        string argStr2,
+        string argStr3,
+        string argStr4,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3, argStr4), file, line, arg1, arg2, arg3, arg4));
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static void CheckSlow<T1, T2, T3, T4, T5>(
+        bool condition,
+        T1 arg1,
+        T2 arg2,
+        T3 arg3,
+        T4 arg4,
+        T5 arg5,
+        string conditionStr,
+        string argStr1,
+        string argStr2,
+        string argStr3,
+        string argStr4,
+        string argStr5,
+        string file,
+        int line) {
+      if (condition) return;
+      Throw(Diagnostics(FormatCheck(conditionStr, argStr1, argStr2, argStr3, argStr4, argStr5), file, line, arg1, arg2, arg3, arg4, arg5));
+    }
+
     static void Throw(string message) => throw new CheckException(message);
 
     static string FormatCheck(params string[] args) => $"Check({String.Join(", ", args)})";
