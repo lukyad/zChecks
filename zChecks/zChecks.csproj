@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Platforms>x64</Platforms>
+    <Platform>x64</Platform>
+    <DebugType>embedded</DebugType>
+    <Deterministic>true</Deterministic>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+  </ItemGroup>
 
 </Project>
