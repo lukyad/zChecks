@@ -194,7 +194,8 @@ namespace z {
           .Append(check.FormatMultiline().IndentMultiline())
           .Append(Indent)
           .Append(args.Length == 0 ? null : ArgsDescription().IndentMultiline())
-          .Where(l => l != null));
+          .Where(l => l != null))
+          .TrimEnd();
 
       // Returns null if there are no non-literal args.
       string ArgsDescription() {
@@ -216,7 +217,7 @@ namespace z {
     static string IndentMultiline(this string str) {
       return String.Join(
           Environment.NewLine,
-          str.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Select(s => Indent + s));
+          str.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Select(s => Indent + s)).TrimEnd();
     }
   }
 }
